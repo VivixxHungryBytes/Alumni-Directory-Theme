@@ -27,7 +27,7 @@
     <div class="row">
         <!-- Loop this part when data is present -->
         <?php
-                    $args = array('post_type'=> 'student', 'posts_per_page'=> 20, 'category_name' => 'Batch 002');
+                    $args = array('post_type'=> 'student', 'posts_per_page'=> 4, 'category_name' => 'Batch 002');
                     $loop = new WP_Query($args);
                     //Loop Initialization
                     if($loop->have_posts()):
