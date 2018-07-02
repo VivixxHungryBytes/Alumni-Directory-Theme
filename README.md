@@ -1,2 +1,2 @@
 # Alumni-Directory-Theme
-php files for the alumni directory
+php files for the alumni directory.
