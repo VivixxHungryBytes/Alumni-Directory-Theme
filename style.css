@@ -20,6 +20,12 @@ input[type=submit]{
 	border: none;
 	border-radius: 5px;
 }
+/*.w-40{
+	width: 35% !important
+}
+.h-35{
+	height: 30% !important
+}*/
 .wrapper{
 	background: url(img/bg.jpg) !important;
 }
@@ -189,17 +195,18 @@ input[type=submit]{
    border-radius: 100%;
    width: 70%;
 }
-.card-img-top {
-    border-radius: 100% !important;
-}
 .card-title{
-    margin-top:15px;
+	margin-top:15px;
 }
 .card-icons{
-    margin:10px 0;
+	margin:10px 0;
 }
 .card-icons a{
-margin:0 14px;
+margin:0 10px;
+color:black;
+}
+.card-icons a i{
+font-size:1em;
 }
 #about{
 	padding: 15% 35px;
@@ -303,4 +310,83 @@ margin:0 14px;
 	font-size: 15px;
 	background-color: #ffffff;
 	border-radius: 100%;
+}
+
+/*  Code Pen Code */
+@media (min-width: 768px) {
+  /* show 3 items */
+  .carousel-inner .active,
+  .carousel-inner .active + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item {
+    display: block;
+  }
+
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+    + .carousel-item,
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+    + .carousel-item
+    + .carousel-item {
+    transition: none;
+  }
+
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+    position: relative;
+    transform: translateX(0);
+  }
+
+  .carousel-inner
+    .active.carousel-item
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -33.3333%;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+
+  /* left or forward direction */
+  .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+  .carousel-item-next.carousel-item-left + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+  .carousel-item-next.carousel-item-left
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    position: relative;
+    transform: translateX(100%);
+    visibility: visible;
+  }
+
+  /* farthest right hidden item must be abso position for animations */
+  .carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+
+  /* right or prev direction */
+  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+  .carousel-item-prev.carousel-item-right + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+  .carousel-item-prev.carousel-item-right
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    position: relative;
+    transform: translateX(-100%);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
 }

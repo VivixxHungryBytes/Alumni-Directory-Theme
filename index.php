@@ -17,124 +17,77 @@
 </div>
 <div id="servicenav"></div>
 <!-- Featured Students -->
-<div id="featrow">
+<?php $featured=get_field('section-2','options') ?>
+<div class="container-fluid">
     <div id="services" class="row">
-        <?php $featured=get_field('section-2', 'options');
-            echo '<div>
-                <h3>'.$featured['header'].'</h3>
-            </div> '?>
+        <?php echo '<div><h3 class="text-center mb-3">'.$featured['header'].'</h3></div>' ?>
     </div>
-    <div class="row">
-        <!-- Loop this part when data is present -->
-        <?php
-                    $args = array('post_type'=> 'student', 'posts_per_page'=> 4, 'category_name' => 'Batch 002');
-                    $loop = new WP_Query($args);
-                    //Loop Initialization
-                    if($loop->have_posts()):
-                    while( $loop -> have_posts()): $loop->the_post();
-                    $title= get_field('job_title');
-                    $socials= get_field('social_links');
-
-                    echo '<div class="col-md-6">
-    <div class="card">
-        <div class="row ">
-            <div class="col-md-4">
-                <img src="'.get_the_post_thumbnail_url().'" class="w-100">
-                <div class="card-icons">
-                    <a href="'.$socials['facebook'].'"><i class="fab fa-facebook fa-lg"></i></a>
-                    <a href="'.$socials['linked_in'].'"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                    <a href="'.$socials['github'].'"><i class="fab fa-github fa-lg"></i></a>
-                    <a href="'.$socials['site'].'"><i class="fas fa-globe fa-lg"></i></a>
-                </div>
-            </div>
-            <div class="col-md-8 px-3">
-                <div class="card-block px-3">
-                    <h4 class="card-title">'.get_the_title().'</h4>
-                    <p class="card-text">'.$title.'</p>
-                    <p class="card-text">'.get_the_content().'</p>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>';
-                    endwhile;
-                    endif; ?>
-    </div>
-</div>
-<div class="gradientbgreverse"></div>
-<div id="projectnav"></div>
-<div class="content">
-    <div class="container">
-        <div id="projects">
-            <?php $projecthead=get_field('section-3','options'); 
-                echo '<h2>'.$projecthead['header'].'</h2>
-                <p>'.$projecthead['subheader'].'</p>'
-                ?>
-            <div class="studProj">
-                <?php 
-                    $args = array('post_type'=> 'projects', 'posts_per_page'=> 15);
-                    $loop = new WP_Query($args);
-                    //Loop Start
-                    if($loop->have_posts()):
-                        while( $loop -> have_posts()): $loop->the_post();
-                        $data = get_post_meta($loop->post->ID, 'projects', true);
-                        echo '<div><img src="'.get_the_post_thumbnail_url().'"><p>'.get_the_content().'</p></div>';
-                        endwhile;
-                    endif;
-                    ?>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="gradientbg"></div>
-<div id="aboutnav"></div>
-<div id="aboutus">
-    <div class="container">
-        <div id="theTeam">
-            <?php $section4= get_field('section-4', 'options'); 
-                echo '<h2>'.$section4['header'].'</h2>'
-                ?>
-            <div class="row">
-                <?php
-                    $args = array('post_type'=> 'student', 'posts_per_page'=> 20, 'category_name' => 'Batch 002');
-                    $loop = new WP_Query($args);
-                    //Loop Initialization
-                    if($loop->have_posts()):
-                    while( $loop -> have_posts()): $loop->the_post();
-                    $title= get_field('job_title');
-                    $socials= get_field('social_links');
-
-                    echo '<div class="col-md-6">
-                            <div class="card">
-                                <div class="row ">
-                                    <div class="col-md-4">
-                                        <img src="'.get_the_post_thumbnail_url().'" class="w-100">
-                                        <div class="card-icons">
-                                            <a href="'.$socials['facebook'].'"><i class="fab fa-facebook fa-lg"></i></a>
-                                            <a href="'.$socials['linked_in'].'"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                                            <a href="'.$socials['github'].'"><i class="fab fa-github fa-lg"></i></a>
-                                            <a href="'.$socials['site'].'"><i class="fas fa-globe fa-lg"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 px-3">
-                                        <div class="card-block px-3">
-                                            <h4 class="card-title">'.get_the_title().'</h4>
-                                            <p class="card-text">'.$title.'</p>
-                                            <p class="card-text">'.get_the_content().'</p>
-
-                                        </div>
-                                    </div>
-
-                                </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner row w-100 mx-auto">
+            <?php
+            //Loop Parameters 
+            $args = array('post_type' => 'student', 'posts_per_page' => 10, 'category_name' => 'Batch 002');
+            $loop = new WP_Query($args);
+            //Loop start
+            $count = 0;
+            if($loop->have_posts()):
+                while($loop -> have_posts()): $loop->the_post();
+                $title = get_field('job_title');
+                $socials = get_field('social_links');
+                
+                if($count==0){
+                echo '
+                <div class="carousel-item col-md-4 active ">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="'.get_the_post_thumbnail_url().'" alt="'.get_the_title().'">
+                        <div class="card-body">
+                            <h4 class="card-title">'.get_the_title().'</h4>
+                            <p class="card-text">'.get_the_content().'</p>
+                            <div class="card-icons">
+                                <a href="'.$socials['facebook'].'"><i class="fab fa-lg fa-facebook"></i></a>
+                                <a href="'.$socials['linked_in'].'"><i class="fab fa-lg fa-linkedin-in"></i></a>
+                                <a href="'.$socials['github'].'"><i class="fab fa-lg fa-github"></i></a>
+                                <a href="'.$socials['site'].'"><i class="fas fa-lg fa-globe"></i></a>
                             </div>
-                        </div>';
-                    endwhile;
-                    endif; ?>
-            </div>
+                        </div>
+                    </div>
+                </div>
+                ';}
+                else{
+                    echo '
+                <div class="carousel-item col-md-4">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="'.get_the_post_thumbnail_url().'" alt="'.get_the_title().'">
+                        <div class="card-body">
+                            <h4 class="card-title">'.get_the_title().'</h4>
+                            <p class="card-text">'.get_the_content().'</p>
+                            <div class="card-icons">
+                                <a href="'.$socials['facebook'].'"><i class="fab fa-lg fa-facebook"></i></a>
+                                <a href="'.$socials['linked_in'].'"><i class="fab fa-lg fa-linkedin-in"></i></a>
+                                <a href="'.$socials['github'].'"><i class="fab fa-lg fa-github"></i></a>
+                                <a href="'.$socials['site'].'"><i class="fas fa-lg fa-globe"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ';}
+                $count++;
+            endwhile;
+        endif;
+             ?>
         </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        </a>
     </div>
+</div>
+
+
+<div id="aboutus">
     <div class="gradientbgreverse"></div>
     <div class="content">
         <div class="container-fluid py-3 fill">
@@ -153,36 +106,26 @@
                     $socials= get_field('social_links');
 
                     echo '<div class="col-md-6">
-    <div class="card">
-        <div class="row ">
-            <div class="col-md-4">
-                <img src="'.get_the_post_thumbnail_url().'" class="w-100">
-                <div class="card-icons">
-                    <a href="'.$socials['facebook'].'"><i class="fab fa-facebook fa-lg"></i></a>
-                    <a href="'.$socials['linked_in'].'"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                    <a href="'.$socials['github'].'"><i class="fab fa-github fa-lg"></i></a>
-                    <a href="'.$socials['site'].'"><i class="fas fa-globe fa-lg"></i></a>
-                </div>
-            </div>
-            <div class="col-md-8 px-3">
-                <div class="card-block px-3">
-                    <h4 class="card-title">'.get_the_title().'</h4>
-                    <p class="card-text">'.$title.'</p>
-                    <p class="card-text">'.get_the_content().'</p>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>';
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="'.get_the_post_thumbnail_url().'" alt="'.get_the_title().'">
+                        <div class="card-body">
+                            <h4 class="card-title">'.get_the_title().'</h4>
+                            <p class="card-text">'.get_the_content().'</p>
+                            <div class="card-icons">
+                                <a href="'.$socials['facebook'].'"><i class="fab fa-lg fa-facebook"></i></a>
+                                <a href="'.$socials['linked_in'].'"><i class="fab fa-lg fa-linkedin-in"></i></a>
+                                <a href="'.$socials['github'].'"><i class="fab fa-lg fa-github"></i></a>
+                                <a href="'.$socials['site'].'"><i class="fas fa-lg fa-globe"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
                     endwhile;
                     endif; ?>
                 </div>
             </div>
         </div>
     </div>
-    <div class="gradientbg"></div>
     <div id="contactnav"></div>
     
 </div>
