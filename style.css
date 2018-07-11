@@ -27,7 +27,11 @@ input[type=submit]{
 	height: 30% !important
 }*/
 .wrapper{
-	background: url(img/bg.jpg) !important;
+	background:  no-repeat center center fixed; 
+ 	-webkit-background-size: cover !important;
+ 	-moz-background-size: cover;
+ 	-o-background-size: cover;
+ 	background-size: cover;
 }
 .clear{
 	clear: both;

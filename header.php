@@ -12,7 +12,7 @@
 
 <body <?php body_class(); ?>>
     <?php $hero=get_field('section-1','options') ?>
-    <div class="wrapper" style="background:url(<?php echo $hero['background'] ?>)!important;">
+    <div class="wrapper" style="background:url(<?php echo $hero['background'] ?>) no-repeat center center fixed;">
         <div id="header">
             <nav class="navbar-nav navbar-expand-lg">
                 <div class="container">
